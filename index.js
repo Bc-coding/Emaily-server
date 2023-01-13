@@ -43,7 +43,7 @@ billingRoutes(app1);
 
 if (process.env.NODE_ENV === "production") {
   // Express will serve up production assets like our main.js, main.css
-  app1.use(express.static("/client/build/static"));
+  app1.use(express.static("/client/build"));
 
   // Express will serve up the index.html if it doesn't recognise the route
   const path = require("path");
