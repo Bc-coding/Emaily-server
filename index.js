@@ -53,11 +53,8 @@ if (process.env.NODE_ENV === "production") {
   const fs = require("fs");
 
   app1.get("*", (req, res) => {
-    fs.readdir(testFolder, (err, files) => {
-      files.forEach((file) => {
-        console.log(file);
-      });
-    });
+    console.log(process.cwd());
+
     console.log(path.join(__dirname, "client", "build", "index.html"));
     res.sendFile(path.join(__dirname, "client", "build", "index.html"));
   });
