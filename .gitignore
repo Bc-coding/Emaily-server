@@ -62,6 +62,3 @@ typings/
 # playground
 fetch.js
 
-# production
-build/
-build/*

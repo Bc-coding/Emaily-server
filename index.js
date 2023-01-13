@@ -44,12 +44,14 @@ billingRoutes(app1);
 
 if (process.env.NODE_ENV === "production") {
   // Express will serve up production assets like our main.js, main.css
-  app1.use(express.static("/client/build"));
+  // app1.use(express.static("/client/build"));
+  app1.use(express.static(path.join(__dirname, "../client/build")));
 
   // Express will serve up the index.html if it doesn't recognise the route
   app1.get("*", (req, res) => {
-    console.log(path.join(__dirname, "client", "build", "index.html"));
-    res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+    // console.log(path.join(__dirname, "client", "build", "index.html"));
+    // res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+    res.sendFile(path.join(__dirname, "../client/build/index.html"));
   });
 }
 
