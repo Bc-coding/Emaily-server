@@ -1,17 +1,22 @@
 const mongoose = require("mongoose");
+const { Schema } = mongoose;
 
-const userSchema = new mongoose.Schema(
+const surveySchema = new Schema(
   {
-    name: {
+    title: {
       type: String,
       required: true,
     },
-    email: {
+    body: {
       type: String,
       required: true,
     },
-    password: {
+    subject: {
       type: String,
+      required: true,
+    },
+    recipients: {
+      type: [String],
       required: true,
     },
   },
@@ -21,4 +26,4 @@ const userSchema = new mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model("user", userSchema);
+module.exports = mongoose.model("survey", surveySchema);

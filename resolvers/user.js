@@ -2,7 +2,7 @@ const { combineResolvers } = require("graphql-resolvers");
 const bcrypt = require("bcryptjs");
 
 // Getting data from database
-const User = require("../database/models/user");
+const User = require("../database/models/User");
 
 module.exports = {
   Query: {
