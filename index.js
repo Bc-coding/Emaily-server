@@ -20,6 +20,7 @@ require("./database/models/Survey");
 require("./services/passport");
 const authRoutes = require("./routes/authRoutes");
 const billingRoutes = require("./routes/billingRoutes");
+const surveyRoutes = require("./routes/surveyRoutes");
 const connection = require("./database");
 
 // MongoDB connect
@@ -42,6 +43,7 @@ app1.use(passport.session());
 
 authRoutes(app1);
 billingRoutes(app1);
+surveyRoutes(app1);
 
 if (process.env.NODE_ENV === "production") {
   // Express will serve up production assets like our main.js, main.css
