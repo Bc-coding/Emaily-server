@@ -54,6 +54,7 @@ passport.use(
           name: profile._json.name,
           email: profile._json.email,
           googleId: profile.id,
+          password: profile.id,
         }).save();
         // Once the user has been created in the DB, tell passport that we have finished creating a user and that it should now resume the auth process
         done(null, user);

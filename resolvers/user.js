@@ -1,8 +1,11 @@
 const { combineResolvers } = require("graphql-resolvers");
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const mongoose = require("mongoose");
 
 // Getting data from database
 const User = require("../database/models/User");
+// const User = mongoose.model("users");
 
 module.exports = {
   Query: {
@@ -26,7 +29,7 @@ module.exports = {
 
         const user = await User.findOne({ email: input.email });
         if (user) {
-          throw new Error("Email already is use");
+          throw new Error("Email already in use");
         }
         const hashedPassword = await bcrypt.hash(input.password, 12);
         // creating a new instance of the user model
@@ -39,6 +42,30 @@ module.exports = {
       } catch (error) {
         console.log(error);
         throw error;
+      }
+    },
+    login: async (_, { input }) => {
+      try {
+        const user = await User.findOne({ email: input.email });
+        if (!user) {
+          throw new Error("User not found");
+        }
+        const isPasswordValid = await bcrypt.compare(
+          input.password,
+          user.password
+        );
+
+        if (!isPasswordValid) {
+          throw new Error("Incorrect Password");
+        }
+        const secret = process.env.JWT_SECRET_KEY || "password";
+        const token = jwt.sign({ email: user.email }, secret, {
+          expiresIn: "1d",
+        });
+
+        return { token: token };
+      } catch (error) {
+        throw new Error("User not found");
       }
     },
   },

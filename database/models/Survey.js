@@ -1,36 +1,29 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
 // import RecipientSchema to make a subdocument
-const RecipientSchema = require("./Recipient");
+const recipientSchema = require("./Recipient");
 
 const surveySchema = new Schema(
   {
     title: {
       type: String,
-      required: true,
     },
     body: {
       type: String,
-      required: true,
     },
     subject: {
       type: String,
-      required: true,
     },
     recipients: {
-      // type: [String],
-      type: [RecipientSchema],
-      required: true,
+      type: [recipientSchema.schema],
     },
     yes: {
       type: Number,
       default: 0,
-      required: true,
     },
     no: {
       type: Number,
       default: 0,
-      required: true,
     },
     // creating a relationship to a particular user -- the survey belongs to the user
     // _ the underscore means a reference field
@@ -47,4 +40,4 @@ const surveySchema = new Schema(
   }
 );
 
-module.exports = mongoose.model("survey", surveySchema);
+module.exports = mongoose.model("surveys", surveySchema);

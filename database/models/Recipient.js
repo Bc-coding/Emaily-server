@@ -5,11 +5,10 @@ const recipientSchema = new Schema(
   {
     email: {
       type: String,
-      required: true,
     },
     responded: {
       type: Boolean,
-      required: true,
+      default: false,
     },
   },
   // the timestamps will automatically have created_at and updated_at fields
