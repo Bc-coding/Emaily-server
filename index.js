@@ -9,6 +9,8 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const typeDefs = require("./graphql/schema");
 const resolvers = require("./graphql/resolvers");
+const getUserFromToken = require("./utils/getUserFromToken");
+
 const path = require("path");
 
 const cookieSession = require("cookie-session");
@@ -88,7 +90,12 @@ async function startApolloServer(typeDefs, resolvers) {
     // expressMiddleware accepts the same arguments:
     // an Apollo Server instance and optional configuration options
     expressMiddleware(server, {
-      context: async ({ req }) => ({ token: req.headers.token }),
+      // context: async ({ req }) => ({ token: req.headers.token }),
+      context: async ({ req, res }) => {
+        const userInfo = await getUserFromToken(req.headers.authorization);
+
+        return { userInfo };
+      },
     })
   );
 

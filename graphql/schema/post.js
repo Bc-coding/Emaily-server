@@ -1,6 +1,15 @@
 module.exports = `
 extend type Mutation {
-    placesToSeeCreate(input: placesToSeeInput):PlacesToSeePost
+    placesToSeeCreate(input: placesToSeeInput):PlacesToSeePostPayload
+  }
+
+  type PlacesToSeePostPayload {
+    userErrors: [UserError!]!
+    post: PlacesToSeePost
+  }
+
+  type UserError {
+    message: String!
   }
 
   type PlacesToSeePost {
