@@ -1,6 +1,7 @@
 // Getting data from database
 const PlacesToSeePost = require("../../database/models/PlacesToSeePost");
-// const User = mongoose.model("users");
+const mongoose = require("mongoose");
+const User = mongoose.model("users");
 
 module.exports = {
   Mutation: {
@@ -19,6 +20,9 @@ module.exports = {
           };
         }
 
+        const user = await User.findOne({ email: userInfo.email });
+        console.log(user);
+
         const { place, location, desc } = input;
         if (!place || !location || !desc) {
           return {
@@ -32,7 +36,8 @@ module.exports = {
           };
         }
 
-        const newPost = new PlacesToSeePost({ ...input });
+        const newPost = new PlacesToSeePost({ ...input, _user: user.id });
+        console.log(newPost);
         const result = await newPost.save();
 
         return {

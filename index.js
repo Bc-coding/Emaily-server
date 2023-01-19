@@ -92,7 +92,9 @@ async function startApolloServer(typeDefs, resolvers) {
     expressMiddleware(server, {
       // context: async ({ req }) => ({ token: req.headers.token }),
       context: async ({ req, res }) => {
+        console.log(req.headers);
         const userInfo = await getUserFromToken(req.headers.authorization);
+        console.log(userInfo);
 
         return { userInfo };
       },

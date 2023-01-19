@@ -20,7 +20,7 @@ extend type Mutation {
 
     createdAt: String!
     updatedAt: String!
-    # user: User!
+    user: User!
   }
 
   type User {
