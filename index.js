@@ -7,8 +7,8 @@ const express = require("express");
 const http = require("http");
 const cors = require("cors");
 const bodyParser = require("body-parser");
-const typeDefs = require("./schema");
-const resolvers = require("./resolvers/index");
+const typeDefs = require("./graphql/schema");
+const resolvers = require("./graphql/resolvers");
 const path = require("path");
 
 const cookieSession = require("cookie-session");

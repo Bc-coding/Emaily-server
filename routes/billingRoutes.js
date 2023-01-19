@@ -1,5 +1,5 @@
 const keys = require("../config/keys");
-const user = require("../schema/user");
+// const user = require("../schema/user");
 const stripe = require("stripe")(keys.stripeSecretKey);
 const requireLogin = require("../middlewares/requireLogin");
 

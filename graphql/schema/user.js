@@ -14,6 +14,8 @@ module.exports = `
     id: ID!
     name: String!
     email: String!
+    createdAt: String!
+    updatedAt: String!
   }
 
   type Token {
@@ -35,5 +37,4 @@ module.exports = `
   input emailInput {
     email: String!
   }
- 
 `;

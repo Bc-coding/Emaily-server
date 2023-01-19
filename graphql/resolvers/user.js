@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
 
 // Getting data from database
-const User = require("../database/models/User");
+const User = require("../../database/models/User");
 // const User = mongoose.model("users");
 
 module.exports = {

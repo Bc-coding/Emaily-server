@@ -1,5 +1,7 @@
 const userTypeDefs = require("./user");
 
+const postTypeDefs = require("./post");
+
 const typeDefs = `
   type Query {
     _: String
@@ -9,4 +11,4 @@ const typeDefs = `
   }
 `;
 
-module.exports = [typeDefs, userTypeDefs];
+module.exports = [typeDefs, userTypeDefs, postTypeDefs];
