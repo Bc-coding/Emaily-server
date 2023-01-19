@@ -23,10 +23,10 @@ module.exports = {
     },
     users: async () => {
       try {
-        // checking database if the user exists
+        // checking database if the users exists
         const users = await User.find();
         if (!users) {
-          throw new Error("User not found!");
+          throw new Error("Users not found!");
         }
         return users;
       } catch (error) {
