@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@apollo/client": "^3.7.3",
+    "@apollo/client": "^3.7.4",
     "@carbon/layout": "^11.9.0",
     "@carbon/react": "^1.19.0",
     "@carbon/styles": "^1.19.0",

@@ -1,5 +1,6 @@
 module.exports = `
   extend type Query {
+    user(input: emailInput): User!
     users: [User!]!
   }
 
@@ -29,6 +30,10 @@ module.exports = `
   input loginInput {
     email: String!
     password: String!
+  }
+
+  input emailInput {
+    email: String!
   }
  
 `;

@@ -9,6 +9,18 @@ const User = require("../database/models/User");
 
 module.exports = {
   Query: {
+    user: async (_, { input }) => {
+      try {
+        // checking database if the user exists
+        const user = await User.findOne({ email: input.email });
+        if (!user) {
+          throw new Error("User not found!");
+        }
+        return user;
+      } catch (error) {
+        console.log(error);
+      }
+    },
     users: async () => {
       try {
         // checking database if the user exists
