@@ -3,7 +3,7 @@ const keys = require("../config/keys");
 
 const getUserFromToken = (token) => {
   try {
-    console.log(token);
+    // console.log(token);
     return JWT.verify(token, keys.jwtSinganiture);
   } catch (error) {
     console.log(error);

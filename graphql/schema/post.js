@@ -14,9 +14,13 @@ extend type Mutation {
 
   type PlacesToSeePost {
     id: ID!
-    place: String!
-    location: String!
+    title: String!
+    category: String!
     desc: String!
+    location: String
+    completed: Boolean
+    date: String
+    memo: String
 
     createdAt: String!
     updatedAt: String!
@@ -31,11 +35,8 @@ extend type Mutation {
   }
 
   input placesToSeeInput {
-    place: String!
-    location: String!
+    title: String!
+    category: String!
     desc: String!
-    people: [String]
-    memories: String
-
   }
 `;

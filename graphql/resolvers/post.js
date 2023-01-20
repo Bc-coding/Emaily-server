@@ -2,12 +2,12 @@
 const PlacesToSeePost = require("../../database/models/PlacesToSeePost");
 const mongoose = require("mongoose");
 const User = mongoose.model("users");
+const canUserMutatePost = require("../../utils/canUserMutatePost");
 
 module.exports = {
   Mutation: {
     placesToSeeCreate: async (_, { input }, { userInfo }) => {
       try {
-        // console.log(userInfo);
         // creating a new instance of the post model
         if (!userInfo) {
           return {
@@ -23,8 +23,8 @@ module.exports = {
         const user = await User.findOne({ email: userInfo.email });
         console.log(user);
 
-        const { place, location, desc } = input;
-        if (!place || !location || !desc) {
+        const { title, category, desc } = input;
+        if (!title || !category || !desc) {
           return {
             userErrors: [
               {

@@ -3,13 +3,25 @@ const { Schema } = mongoose;
 
 const placesToSeePostSchema = new Schema(
   {
-    place: {
+    title: {
+      type: String,
+    },
+    category: {
+      type: String,
+    },
+    desc: {
       type: String,
     },
     location: {
       type: String,
     },
-    desc: {
+    completed: {
+      type: Boolean,
+    },
+    date: {
+      type: String,
+    },
+    memo: {
       type: String,
     },
     // creating a relationship to a particular user -- the survey belongs to the user
