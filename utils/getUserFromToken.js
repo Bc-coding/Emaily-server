@@ -2,9 +2,11 @@ const JWT = require("jsonwebtoken");
 const keys = require("../config/keys");
 
 const getUserFromToken = (token) => {
+  const secret = keys.jwtSinganiture;
   try {
-    // console.log(token);
-    return JWT.verify(token, keys.jwtSinganiture);
+    const decoded = JWT.verify(token, secret);
+    console.log(decoded);
+    return decoded;
   } catch (error) {
     console.log(error);
     return null;

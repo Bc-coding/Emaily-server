@@ -2,6 +2,7 @@ const { combineResolvers } = require("graphql-resolvers");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
+const keys = require("../../config/keys");
 
 // Getting data from database
 const User = require("../../database/models/User");
@@ -48,8 +49,8 @@ module.exports = {
         // then overwrite the password with hashed password
         const newUser = new User({ ...input, password: hashedPassword });
         const result = await newUser.save();
-        console.log(result._id, typeof result._id);
-        console.log(result.id, typeof result.id);
+        // console.log(result._id, typeof result._id);
+        // console.log(result.id, typeof result.id);
         return result;
       } catch (error) {
         console.log(error);
@@ -70,10 +71,14 @@ module.exports = {
         if (!isPasswordValid) {
           throw new Error("Incorrect Password");
         }
-        const secret = process.env.JWT_SECRET_KEY || "password";
-        const token = jwt.sign({ email: user.email }, secret, {
-          expiresIn: "1d",
-        });
+        // const secret = process.env.JWT_SECRET_KEY || "password";
+        const secret = keys.jwtSinganiture;
+
+        // const token = jwt.sign({ email: user.email }, "password", {
+        //   expiresIn: "1d",
+        // });
+
+        const token = jwt.sign({ email: user.email }, secret);
 
         return { token: token };
       } catch (error) {
