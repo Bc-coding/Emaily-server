@@ -3,6 +3,9 @@ const { Schema } = mongoose;
 
 const placesToSeePostSchema = new Schema(
   {
+    postId: {
+      type: String,
+    },
     title: {
       type: String,
     },

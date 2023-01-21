@@ -18,7 +18,9 @@ const canUserMutatePost = async ({ userInfo, postId }) => {
 
   const post = await PlacesToSeePost.findOne({ postId });
 
-  if (post?._user !== user.id) {
+  console.log(user._id);
+  console.log(post._user._id);
+  if (post?._user !== user._id) {
     return {
       userErrors: [
         {

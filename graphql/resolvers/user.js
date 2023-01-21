@@ -3,6 +3,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
 const keys = require("../../config/keys");
+const uuid = require("uuid");
 
 // Getting data from database
 const User = require("../../database/models/User");
@@ -47,7 +48,11 @@ module.exports = {
         const hashedPassword = await bcrypt.hash(input.password, 12);
         // creating a new instance of the user model
         // then overwrite the password with hashed password
-        const newUser = new User({ ...input, password: hashedPassword });
+        const newUser = new User({
+          ...input,
+          password: hashedPassword,
+          userId: uuid.v4(),
+        });
         const result = await newUser.save();
         // console.log(result._id, typeof result._id);
         // console.log(result.id, typeof result.id);

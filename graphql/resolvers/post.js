@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const User = mongoose.model("users");
 const Post = mongoose.model("placesToSeePost");
 const canUserMutatePost = require("../../utils/canUserMutatePost");
+const uuid = require("uuid");
 
 module.exports = {
   Mutation: {
@@ -38,9 +39,25 @@ module.exports = {
           };
         }
 
-        const newPost = new PlacesToSeePost({ ...input, _user: user.id });
-        console.log(newPost);
+        const postId = uuid.v4();
+
+        const newPost = new PlacesToSeePost({
+          ...input,
+          postId: postId,
+          _user: user.id,
+        });
+        // console.log(newPost);
         const result = await newPost.save();
+
+        // update the user with posts
+
+        const update = { posts: [...user.posts, newPost._id] };
+        // console.log(update);
+
+        const query = await User.findOneAndUpdate(user.id, update, {
+          new: true,
+        });
+        console.log(query);
 
         return {
           userErrors: [],
@@ -66,28 +83,25 @@ module.exports = {
         };
       }
 
-      // const post = await Post.findOne({ title: input.title });
-      // console.log(post);
+      const error = await canUserMutatePost({
+        userInfo,
+        postId: input.postId,
+      });
 
-      // const error = await canUserMutatePost({
-      //   userId: userInfo.userId,
-      //   postId: post._id,
-      // });
+      if (error) return error;
 
-      // if (error) return error;
-
-      // const { title, content } = post;
-      // if (!title && !content) {
-      //   return {
-      //     userErrors: [
-      //       {
-      //         message:
-      //           "you must provide either a title or a content to update a post",
-      //       },
-      //     ],
-      //     post: null,
-      //   };
-      // }
+      const { title, category, desc } = post;
+      if (!title && !category && !desc) {
+        return {
+          userErrors: [
+            {
+              message:
+                "you must provide either a title, category and description to update a post",
+            },
+          ],
+          post: null,
+        };
+      }
 
       // const existingPost = await prisma.post.findUnique({
       //   where: {

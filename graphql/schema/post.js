@@ -1,7 +1,7 @@
 module.exports = `
 extend type Mutation {
-    placesToSeeCreate(input: placesToSeeInput):PlacesToSeePostPayload
-    placesToSeeUpdate(input: placesToSeeInput):PlacesToSeePostPayload
+    placesToSeeCreate(input: placesToSeeCreateInput):PlacesToSeePostPayload
+    placesToSeeUpdate(input: placesToSeeUpdateInput):PlacesToSeePostPayload
   }
 
   type PlacesToSeePostPayload {
@@ -15,6 +15,7 @@ extend type Mutation {
 
   type PlacesToSeePost {
     id: ID!
+    postId: String!
     title: String!
     category: String!
     desc: String!
@@ -24,17 +25,17 @@ extend type Mutation {
     memo: String
     createdAt: String!
     updatedAt: String!
-    # user: User!
+    _user: User
   }
 
   type User {
-    id: ID!
+    userId: String!
     name: String!
     email: String!
     # posts: [Post!]!
   }
 
-  input placesToSeeInput {
+  input placesToSeeCreateInput {
     title: String!
     category: String!
     desc: String!
@@ -42,5 +43,10 @@ extend type Mutation {
     completed: Boolean
     date: String
     memo: String
+  }
+
+  input placesToSeeUpdateInput {
+    postId: String!
+    post: placesToSeeCreateInput!
   }
 `;

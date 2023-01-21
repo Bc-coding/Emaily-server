@@ -12,6 +12,7 @@ module.exports = `
   ###### TYPE ######
   type User {
     id: ID!
+    userId: String!
     name: String!
     email: String!
     createdAt: String!
