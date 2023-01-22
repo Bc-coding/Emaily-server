@@ -9,7 +9,6 @@ const uuid = require("uuid");
 module.exports = {
   Mutation: {
     placesToSeeCreate: async (_, { input }, { userInfo }) => {
-      console.log(userInfo);
       try {
         // creating a new instance of the post model
         if (!userInfo) {
@@ -24,7 +23,6 @@ module.exports = {
         }
 
         const user = await User.findOne({ email: userInfo.email });
-        console.log(user);
 
         const { title, category, desc } = input;
         if (!title || !category || !desc) {
@@ -46,22 +44,22 @@ module.exports = {
           postId: postId,
           _user: user.id,
         });
-        // console.log(newPost);
-        const result = await newPost.save();
+
+        await newPost.save();
 
         // update the user with posts
-
         const update = { posts: [...user.posts, newPost._id] };
-        // console.log(update);
-
-        const query = await User.findOneAndUpdate(user.id, update, {
+        await User.findOneAndUpdate(user.id, update, {
           new: true,
         });
-        console.log(query);
+        // populate the post with the user's info
+        const post = await Post.findOne({ postId: postId })
+          .populate("_user")
+          .exec();
 
         return {
           userErrors: [],
-          post: result,
+          post: post,
         };
       } catch (error) {
         console.log(error);

@@ -32,7 +32,7 @@ extend type Mutation {
     userId: String!
     name: String!
     email: String!
-    # posts: [Post!]!
+    # posts: [Post!]
   }
 
   input placesToSeeCreateInput {
