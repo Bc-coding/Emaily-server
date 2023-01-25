@@ -10,11 +10,14 @@ import { setContext } from "@apollo/client/link/context";
 
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
-import "./index.scss";
+// import "./index.scss";
 import reduxThunk from "redux-thunk";
 
 import App from "./components/App";
 import reducers from "./reducers";
+
+// 1. import `ChakraProvider` component
+import { ChakraProvider } from "@chakra-ui/react";
 
 import axios from "axios";
 window.axios = axios;
@@ -54,7 +57,9 @@ store.subscribe(() => console.log("store: ", store.getState()));
 ReactDOM.render(
   <ApolloProvider client={client}>
     <Provider store={store}>
-      <App />
+      <ChakraProvider>
+        <App />
+      </ChakraProvider>
     </Provider>
   </ApolloProvider>,
   document.querySelector("#root")
