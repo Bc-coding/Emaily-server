@@ -1,7 +1,7 @@
 module.exports = `
 extend type Mutation {
-    placesToSeeCreate(input: placesToSeeCreateInput):PlacesToSeePostPayload
-    placesToSeeUpdate(input: placesToSeeUpdateInput):PlacesToSeePostPayload
+    createPlacesToSee(input: placesToSeeCreateInput):PlacesToSeePostPayload
+    updatePlacesToSee(input: placesToSeeUpdateInput):PlacesToSeePostPayload
   }
 
   type PlacesToSeePostPayload {

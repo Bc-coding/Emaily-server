@@ -8,7 +8,7 @@ const uuid = require("uuid");
 
 module.exports = {
   Mutation: {
-    placesToSeeCreate: async (_, { input }, { userInfo }) => {
+    createPlacesToSee: async (_, { input }, { userInfo }) => {
       try {
         // creating a new instance of the post model
         if (!userInfo) {
@@ -67,7 +67,7 @@ module.exports = {
       }
     },
 
-    placesToSeeUpdate: async (_, { input }, { userInfo }) => {
+    updatePlacesToSee: async (_, { input }, { userInfo }) => {
       console.log(userInfo);
       console.log(input);
       if (!userInfo) {
