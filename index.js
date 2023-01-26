@@ -92,11 +92,20 @@ async function startApolloServer(typeDefs, resolvers) {
     expressMiddleware(server, {
       // context: async ({ req }) => ({ token: req.headers.token }),
       context: async ({ req, res }) => {
+        const { cache } = server;
+
         console.log(req.headers.authorization);
         const userInfo = await getUserFromToken(req.headers.authorization);
         // console.log(userInfo);
 
-        return { userInfo };
+        return {
+          userInfo,
+          // We create new instances of our data sources with each request,
+          // passing in our server's cache.
+          dataSources: {
+            boredAPI: new BoredAPI({ cache }),
+          },
+        };
       },
     })
   );
@@ -113,7 +122,7 @@ async function startApolloServer(typeDefs, resolvers) {
   app2.use(passport.session());
 
   // Modified server startup
-  await new Promise((resolve) => httpServer.listen({ port: 4000 }, resolve));
+  await new Promise(resolve => httpServer.listen({ port: 4000 }, resolve));
   console.log(`🚀 Apollo Server ready at http://localhost:4000/`);
 }
 

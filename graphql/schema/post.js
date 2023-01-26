@@ -1,7 +1,11 @@
 module.exports = `
+ extend type Query {
+    postPlacesToSee(input: postId):  PlacesToSeePostPayload!
+    postsPlacesToSee: [PlacesToSeePostPayload!]!
+  }
 extend type Mutation {
-    createPlacesToSee(input: placesToSeeCreateInput):PlacesToSeePostPayload
-    updatePlacesToSee(input: placesToSeeUpdateInput):PlacesToSeePostPayload
+    createPlacesToSee(input: placesToSeeCreateInput):PlacesToSeePostPayload!
+    updatePlacesToSee(input: placesToSeeUpdateInput):PlacesToSeePostPayload!
   }
 
   type PlacesToSeePostPayload {

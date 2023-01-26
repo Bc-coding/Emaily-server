@@ -7,6 +7,33 @@ const canUserMutatePost = require("../../utils/canUserMutatePost");
 const uuid = require("uuid");
 
 module.exports = {
+  Query: {
+    postPlacesToSee: async (_, { input }) => {
+      try {
+        // checking database if the user exists
+        const post = await Post.findOne({ postId: input.postId });
+        if (!post) {
+          throw new Error("Post not found!");
+        }
+        return post;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    postsPlacesToSee: async () => {
+      try {
+        // checking database if the users exists
+        const posts = await Post.find();
+        if (!posts) {
+          throw new Error("Posts not found!");
+        }
+        return posts;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+  },
+
   Mutation: {
     createPlacesToSee: async (_, { input }, { userInfo }) => {
       try {
