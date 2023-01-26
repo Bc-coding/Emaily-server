@@ -1,6 +1,7 @@
 module.exports = `
  extend type Query {
     activity:  activityPayload!
+    activityByType(input: typeInput): activityPayload!
   }  
 
   type actvityPayload {
@@ -11,5 +12,9 @@ module.exports = `
     price: Int
     link: String
     key: String
+  }
+
+  input typeInput {
+    type: String!
   }
 `;
