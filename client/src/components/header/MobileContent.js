@@ -8,6 +8,7 @@ import {
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import { Link, Text } from "@chakra-ui/react";
+import navItems from "./constants";
 
 export default function MobileContent({ display, changeDisplay }) {
   return (
@@ -35,23 +36,21 @@ export default function MobileContent({ display, changeDisplay }) {
       </Flex>
 
       <Flex flexDir="column" align="center">
-        <Link href="/">
-          <Button as="a" variant="ghost" aria-label="Home" my={5} w="100%">
-            Home
-          </Button>
-        </Link>
-
-        <Link href="/about">
-          <Button as="a" variant="ghost" aria-label="About" my={5} w="100%">
-            About
-          </Button>
-        </Link>
-
-        <Link href="/contact">
-          <Button as="a" variant="ghost" aria-label="Contact" my={5} w="100%">
-            Contact
-          </Button>
-        </Link>
+        {navItems.map(item => {
+          return (
+            <Link key={item.id} href={item.href}>
+              <Button
+                as="a"
+                variant="ghost"
+                aria-label={item.nave}
+                my={5}
+                w="100%"
+              >
+                {item.name}
+              </Button>
+            </Link>
+          );
+        })}
       </Flex>
     </Flex>
   );

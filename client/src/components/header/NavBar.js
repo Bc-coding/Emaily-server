@@ -10,6 +10,7 @@ import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import { Link, Text } from "@chakra-ui/react";
 import MobileContent from "./MobileContent";
 import Logo from "./Logo";
+import navItems from "./constants";
 
 export default function DarkModeSwitch() {
   const { colorMode, toggleColorMode } = useColorMode();
@@ -21,23 +22,21 @@ export default function DarkModeSwitch() {
       <Flex position="fixed" top="1rem" right="1rem" align="center">
         {/* Desktop */}
         <Flex display={["none", "none", "flex", "flex"]}>
-          <Link href="/">
-            <Button as="a" variant="ghost" aria-label="Home" my={5} w="100%">
-              Home
-            </Button>
-          </Link>
-
-          <Link href="/about">
-            <Button as="a" variant="ghost" aria-label="About" my={5} w="100%">
-              About
-            </Button>
-          </Link>
-
-          <Link href="/contact">
-            <Button as="a" variant="ghost" aria-label="Contact" my={5} w="100%">
-              Contact
-            </Button>
-          </Link>
+          {navItems.map(item => {
+            return (
+              <Link key={item.id} href={item.href}>
+                <Button
+                  as="a"
+                  variant="ghost"
+                  aria-label="Home"
+                  my={5}
+                  w="100%"
+                >
+                  {item.name}
+                </Button>
+              </Link>
+            );
+          })}
         </Flex>
 
         {/* Mobile */}
