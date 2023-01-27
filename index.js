@@ -10,6 +10,7 @@ const bodyParser = require("body-parser");
 const typeDefs = require("./graphql/schema");
 const resolvers = require("./graphql/resolvers");
 const getUserFromToken = require("./utils/getUserFromToken");
+const BoredAPI = require("./graphql/dataSources/bored-api");
 
 const path = require("path");
 
@@ -103,7 +104,7 @@ async function startApolloServer(typeDefs, resolvers) {
           // We create new instances of our data sources with each request,
           // passing in our server's cache.
           dataSources: {
-            boredAPI: new boredAPI({ cache }),
+            boredAPI: new BoredAPI({ cache }),
           },
         };
       },
