@@ -1,6 +1,6 @@
 module.exports = `
  extend type Query {
-    postPlacesToSee(input: postId):  PlacesToSeePostPayload!
+    postPlacesToSee(input: postIdInput):  PlacesToSeePostPayload!
     postsPlacesToSee: [PlacesToSeePostPayload!]!
   }
 extend type Mutation {
@@ -52,5 +52,9 @@ extend type Mutation {
   input placesToSeeUpdateInput {
     postId: String!
     post: placesToSeeCreateInput!
+  }
+
+  input postIdInput {
+    postId: String!
   }
 `;

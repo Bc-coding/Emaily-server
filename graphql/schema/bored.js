@@ -4,7 +4,7 @@ module.exports = `
     activityByType(input: typeInput): activityPayload!
   }  
 
-  type actvityPayload {
+  type activityPayload {
     activity: String!
     accessibility: Int
     type: String
